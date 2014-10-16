@@ -1,16 +1,18 @@
 package exercise3;
 
+import java.util.concurrent.atomic.AtomicLong;
+
 import common.Counter;
 
 public class AtomicCounter implements Counter {
 
-    @Override
+	AtomicLong atomic = new AtomicLong();
+	
     public void increment() {
-
+    	atomic.incrementAndGet();
     }
 
-    @Override
     public long getValue() {
-        return 0;
+        return atomic.longValue();
     }
 }

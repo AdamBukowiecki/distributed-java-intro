@@ -4,7 +4,6 @@ public class VolatileTask implements Runnable {
 
     private boolean isRunning = true;
 
-    @Override
     public void run() {
         long counter = 0;
         while (isRunning) {

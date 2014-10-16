@@ -3,14 +3,14 @@ package exercise1;
 import common.Counter;
 
 public class SynchronizedCounter implements Counter {
-
-    @Override
-    public void increment() {
-
+	
+	private long value = 0;
+	
+	public synchronized void increment() {
+		value++;
     }
 
-    @Override
     public long getValue() {
-        return 0;
+        return value;
     }
 }
