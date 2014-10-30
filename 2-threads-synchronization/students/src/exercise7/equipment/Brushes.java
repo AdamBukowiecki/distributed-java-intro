@@ -9,9 +9,12 @@ public class Brushes {
             throw new IllegalStateException("There are no more brushes!");
         }
         available -= 1;
+        if (available > 0)
+        	notifyAll();
     }
 
     public synchronized void returnBrush() {
         available += 1;
+        notifyAll();
     }
 }

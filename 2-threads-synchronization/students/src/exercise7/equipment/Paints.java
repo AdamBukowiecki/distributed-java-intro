@@ -13,5 +13,6 @@ public class Paints {
 
     public synchronized void returnPaint() {
         available += 1;
+        notifyAll();
     }
 }

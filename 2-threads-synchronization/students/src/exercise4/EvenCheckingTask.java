@@ -19,14 +19,12 @@ public class EvenCheckingTask implements Runnable {
         for (int i = 0; i < numberOfIterations; ++i) {
         	lock.lock();
 	        try {
-//        	synchronized(this) {
 	        	counter.increment();
 		        counter.increment();
 	            if (counter.getValue() % 2 != 0) {
 	                System.out.println("Value is not even!");
 	                break;
 	            }
-//        	}
         	} finally {
         		lock.unlock();
         	}
