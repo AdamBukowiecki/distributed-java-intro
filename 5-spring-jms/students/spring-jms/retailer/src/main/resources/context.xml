@@ -11,10 +11,24 @@
 
     <bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
         <property name="connectionFactory" ref="connectionFactory"/>
+        <property name="sessionTransacted" value="true"/>
     </bean>
 
     <bean id="offerTopic" class="org.apache.activemq.command.ActiveMQTopic">
         <constructor-arg value="offerTopic"/>
+    </bean>
+    
+    <bean id="buyService" class="pl.edu.amu.dji.jms.lab2.retailer.service.BuyService">
+        <property name="jmsTemplate" ref="jmsTemplate"/>
+    	<property name="orderQueue" ref="orderQueue"/>
+    	<property name="offerTopic" ref="offerTopic"/>
+    </bean>
+    
+    <bean id="listenerContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer"
+        <property name="messageListener" ref="buyService"/>
+    	<property name="connectionFactory" ref="connectionFactory"/>
+    	<property name="destination" ref="offerTopic"/>
+    	<property name="sessionTransacted" value="true"/>
     </bean>
 
 </beans>

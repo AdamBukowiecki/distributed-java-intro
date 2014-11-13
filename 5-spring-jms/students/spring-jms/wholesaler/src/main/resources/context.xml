@@ -1,14 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
                            http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/tx/spring-tx.xsd
                            ">
 
+    <tx:annotation-driven/>
     <bean id="connectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
         <property name="brokerURL" value="tcp://localhost:61616"/>
     </bean>
 
+    <bean id="transactionManager" class="org.springframework.jms.connection.JmsTransactionManager" >
+        <property name="connectionFactory" ref="connectionFactory"/>
+    </bean>
+    
     <bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
         <property name="connectionFactory" ref="connectionFactory"/>
     </bean>
@@ -20,5 +27,18 @@
     <bean id="offerTopic" class="org.apache.activemq.command.ActiveMQTopic">
         <constructor-arg value="offerTopic"/>
     </bean>
+    
+    <bean id="offerService" class="pl.edu.amu.dji.jms.lab2.wholesaler.service.OfferService">
+    	<property name="jmsTemplate" ref="jmsTemplate"/>
+    	<property name="orderQueue" ref="orderQueue"/>
+    	<property name="offerTopic" ref="offerTopic"/>
+    </bean>
+    
+    <bean id="orderService" class="pl.edu.amu.dji.jms.lab2.wholesaler.service.OrderService"
+        <property name="messageListener" ref="buyService"/>
+    	<property name="connectionFactory" ref="connectionFactory"/>
+    	<property name="destination" ref="orderQueue"/>
+    </bean>    
+        
 
 </beans>
