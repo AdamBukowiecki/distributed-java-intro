@@ -1,8 +1,9 @@
 
 Program doesn't work in most cases.
-Problems:
-	- sometimes donors can't put new item what finally closes the market (no idea why yet)
+Problems to fix:
+	- sometimes when there are more than one donor they can't put new item (no idea why yet) what finally closes the market 
 	- when it (no idea why yet) works program can't stop (market'll be never closed)
+	
 	
 # Charity Flea Market #
 
