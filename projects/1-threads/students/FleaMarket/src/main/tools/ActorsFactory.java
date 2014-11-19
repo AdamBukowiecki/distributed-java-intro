@@ -1,4 +1,4 @@
-package main;
+package main.tools;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -8,10 +8,9 @@ import main.actors.Donor;
 import main.actors.MarketManager;
 import main.actors.Recipient;
 
-public class Starter {
+public class ActorsFactory {
 
-	public static void main(String[] args) {
-		
+	public static void createActors() {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		String line = new String();
 		try {
@@ -34,17 +33,6 @@ public class Starter {
 			e.printStackTrace();
 		}
 		
-		MarketManager.getInstance().openMarket();
-		
-		try {
-			Thread.sleep(60 * 1000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		
-		if(MarketManager.getInstance().isMarketOpen())
-			MarketManager.getInstance().closeMarket();
-		
 	}
-
+	
 }

@@ -1,10 +1,21 @@
 
-Program doesn't work in most cases.
-Problems to fix:
-	- sometimes when there are more than one donor they can't put new item (no idea why yet) what finally closes the market 
-	- when it (no idea why yet) works program can't stop (market'll be never closed)
-	
-	
+Fixed and ready to go!
+To run FleaMarket start from class Starter (main is there).
+File config.txt is vital to run project, be sure in Starter class ConfigurationTool.load method has a correct path to it as an argument.
+Additionally, in config.txt file you can change some parametrs like registration time (see more in config.txt).
+If it's done, run program and enter actors (by standard input). Example creating 3 recipients and 4 donors:
+
+D Tomek
+D Robert
+R Mariusz
+D Agnieszka
+D Magda
+R Radek
+R Tadeusz
+
+Empty line ends creating actors and open the market!
+
+
 # Charity Flea Market #
 
 The goal of this project is to implement a multi-threaded simulation of a "Charity Flea Market". 

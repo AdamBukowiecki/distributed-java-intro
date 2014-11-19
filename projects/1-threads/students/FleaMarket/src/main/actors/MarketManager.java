@@ -5,6 +5,7 @@ import java.util.Set;
 
 public class MarketManager {
 
+	// Singleton
 	private static MarketManager INSTANCE;
 	
 	private Set<Recipient> recipients;
@@ -36,9 +37,9 @@ public class MarketManager {
 	}
 	
 	public void openMarket() {
+		Chairman.getInstance().startAuction();
 		for(Donor donor: donors) donor.startAddingItems();
 		for(Recipient recipient: recipients) recipient.startBuying();
-		Chairman.getInstance().startAuction();
 		isMarketOpen = true;
 	}
 	
@@ -53,6 +54,7 @@ public class MarketManager {
 	public void closeMarket() {
 		for(Donor donor: donors) donor.stopAddingItems();
 		for(Recipient recipient: recipients) recipient.stopBuying();
+		Chairman.getInstance().stopAuction();
 		isMarketOpen = false;
 	}
 	

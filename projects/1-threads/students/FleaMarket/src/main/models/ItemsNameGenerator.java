@@ -2,6 +2,13 @@ package main.models;
 
 import java.util.concurrent.locks.ReentrantLock;
 
+/**
+ * 
+ * Generates unique names in a number of colors.size * sizes.size * kinds.size. 
+ * 
+ * @author Adam
+ *
+ */
 public class ItemsNameGenerator {
 
 	private static final String[] colors = {"Black", "White", "Green", "Red", "Blue", "Yellow", "Gold"};
