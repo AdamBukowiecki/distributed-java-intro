@@ -11,14 +11,26 @@ import main.actors.Recipient;
 public class ActorsFactory {
 
 	public static void createActors() {
+		
+		for(int i = 0; i < Integer.parseInt(ConfigurationTool.getParamter("RECIPIENTS")); i++)
+			MarketManager.getInstance().addNewRecipient(new Recipient("recipient_" + i));
+		
+		for(int i = 0; i < Integer.parseInt(ConfigurationTool.getParamter("DONORS")); i++)
+			MarketManager.getInstance().addNewDonor(new Donor("donor_" + i));
+		
+		/*
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		String line = new String();
+		
+		
+		
 		try {
 			while( (line = br.readLine()) != null) {
 				if(line.isEmpty())
 					break;
 				String[] splitLine = line.split(" ");
 				String name = new String();
+				
 				int i = 1;
 				while(i < splitLine.length)
 					name += splitLine[i++] + " ";
@@ -32,6 +44,7 @@ public class ActorsFactory {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		*/
 		
 	}
 	
