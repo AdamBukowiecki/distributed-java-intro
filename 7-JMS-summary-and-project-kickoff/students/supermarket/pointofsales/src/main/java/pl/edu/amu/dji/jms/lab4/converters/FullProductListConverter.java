@@ -1,5 +1,7 @@
 package pl.edu.amu.dji.jms.lab4.converters;
 
+import java.util.Collections;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -35,12 +37,10 @@ public class FullProductListConverter implements MessageConverter {
 		
 		Map<String, Double> productsList = new HashMap<>();
 		MapMessage mapMessage = (MapMessage) message;
-		Set<String> namesSet = new TreeSet<>();
 		
-		while(mapMessage.getMapNames().hasMoreElements())
-			namesSet.add( (String) mapMessage.getMapNames().nextElement() );
+		Enumeration<String> keyEnum = mapMessage.getMapNames();
 		
-		for(String name: namesSet)
+		for(String name: Collections.list(keyEnum))
 			productsList.put(name, mapMessage.getDouble(name));		
 		
 		return new FullProductList(productsList);

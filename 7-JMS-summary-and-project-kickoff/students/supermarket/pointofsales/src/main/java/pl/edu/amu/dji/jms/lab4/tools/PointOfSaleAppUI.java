@@ -10,6 +10,7 @@ public class PointOfSaleAppUI {
 
 		private final String QUIT = "quit";
 		private final String SELL = "sell";
+		private final String PRINT_PRODUCTS = "print";
 		
 		private final BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 	
@@ -27,6 +28,11 @@ public class PointOfSaleAppUI {
 					case SELL:
 						String productName = getProductName();
 						PointOfSale.getInstance().sell(productName);
+						break;
+						
+					case PRINT_PRODUCTS:
+						System.out.println("Available products with prices:");
+						System.out.println(PointOfSale.getInstance().toString());
 						break;
 					
 					case QUIT:
@@ -51,6 +57,7 @@ public class PointOfSaleAppUI {
 		private void prepareUI() {
 			System.out.println(" ------------------ Point of Sale ------------------");
 			System.out.println("To sell the product, enter '" + SELL  + "'.");
+			System.out.println("To print all products, enter '" + PRINT_PRODUCTS  + "'.");
 			System.out.println("To exit, enter '" + QUIT  + "'.");
 		}
 		
@@ -65,6 +72,17 @@ public class PointOfSaleAppUI {
 			if(!PointOfSale.getInstance().getProducts().containsKey(name))
 				throw new IOException("There is no such product!");
 			return name;
+		}
+
+		public void setPOSName() {
+			System.out.print("POS name: ");
+			String name = new String();
+			try {
+				name = bufferedReader.readLine();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			PointOfSale.getInstance().setName(name);
 		}
 	
 	

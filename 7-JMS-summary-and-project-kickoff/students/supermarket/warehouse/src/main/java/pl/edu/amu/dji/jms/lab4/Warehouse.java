@@ -23,8 +23,6 @@ public class Warehouse {
 	private Warehouse() {
 		products = new HashMap<>();	
 		pointsOfSale = new HashSet<>();
-		priceChangeService = new PriceChangeService();
-		fullProductListService = new FullProductListService();
 		
 		generateProducts();
 		
@@ -71,5 +69,15 @@ public class Warehouse {
 		ProductsGenerator generator = new ProductsGenerator();
 		generator.generateProducts(products);
 	}
+	
+	public void setPriceChangeService(PriceChangeService priceChangeService) {
+		this.priceChangeService = priceChangeService;
+	}
+
+	public void setFullProductListService(
+			FullProductListService fullProductListService) {
+		this.fullProductListService = fullProductListService;
+	}
+
 	
 }

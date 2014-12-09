@@ -24,7 +24,7 @@ public class AddPointOfSaleService {
 	
 	@Transactional
 	public void sendAddPointOfSale() {
-		AddPointOfSale add = new AddPointOfSale(PointOfSale.getInstance().getId());
+		AddPointOfSale add = new AddPointOfSale(PointOfSale.getInstance().getName());
 		jmsTemplate.convertAndSend(add);
 	}
 	

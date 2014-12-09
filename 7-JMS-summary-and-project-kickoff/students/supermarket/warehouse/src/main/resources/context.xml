@@ -27,13 +27,20 @@
         <property name="connectionFactory" ref="connectionFactory"/>
     </bean>
 
-
-    <bean id="fullProductListJMSTemplate" class="org.springframework.jms.core.JmsTemplate">
+	<!-- Full product list sending -->
+	
+    <bean id="fullProductListJmsTemplate" class="org.springframework.jms.core.JmsTemplate">
         <property name="connectionFactory" ref="connectionFactory"/>
         <property name="defaultDestination" ref="fullProductListTopic"/>
         <property name="messageConverter" ref="fullProductListConverter"/>
         <property name="sessionTransacted" value="true"/>
     </bean>
+	
+	<bean id="fullProductListTopic" class="org.apache.activemq.command.ActiveMQTopic">
+        <constructor-arg value="fullProductListTopic"/>
+    </bean>
+	
+	<!-- Price changing -->
 	
 	<bean id="priceChangeJMSTemplate" class="org.springframework.jms.core.JmsTemplate">
         <property name="connectionFactory" ref="connectionFactory"/>
@@ -42,18 +49,16 @@
         <property name="sessionTransacted" value="true"/>
     </bean>
 
-    <bean id="newPOSQueue" class="org.apache.activemq.command.ActiveMQQueue">
-        <constructor-arg value="newPOSQueue"/>
-    </bean>
-
     <bean id="priceChangeTopic" class="org.apache.activemq.command.ActiveMQTopic">
         <constructor-arg value="priceChangeTopic"/>
     </bean>
-    
-    <bean id="fullProductListTopic" class="org.apache.activemq.command.ActiveMQTopic">
-        <constructor-arg value="fullProductListTopic"/>
+	
+	<!-- New POS -->
+	
+	<bean id="addPointOfSaleQueue" class="org.apache.activemq.command.ActiveMQQueue">
+        <constructor-arg value="addPointOfSaleQueue"/>
     </bean>
-
+ 
     <bean id="addPointOfSaleServiceAdapter" class="org.springframework.jms.listener.adapter.MessageListenerAdapter">
         <property name="delegate" ref="addPointOfSaleService"/>
         <property name="defaultListenerMethod" value="addPointOfSale"/>
@@ -63,8 +68,9 @@
     <bean id="messageListenerContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
         <property name="messageListener" ref="addPointOfSaleServiceAdapter"/>
         <property name="connectionFactory" ref="connectionFactory"/>
-        <property name="destination" ref="newPOSQueue"/>
+        <property name="destination" ref="addPointOfSaleQueue"/>
         <property name="sessionTransacted" value="true"/>
         <property name="transactionManager" ref="transactionManager"/>
     </bean>
+	
 </beans>

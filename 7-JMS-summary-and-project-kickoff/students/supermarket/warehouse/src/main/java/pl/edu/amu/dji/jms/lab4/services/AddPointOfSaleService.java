@@ -13,7 +13,7 @@ public class AddPointOfSaleService {
 	@Transactional
 	public void addPointOfSale(AddPointOfSale addPoint) {
 		Warehouse.getInstance().addNewPointOfSale(addPoint.getName());
-        WarehouseAppUI.print("New POS has been registered.");
+        WarehouseAppUI.print("New POS (" + addPoint.getName() +") has been registered.");
 	}
 
 }

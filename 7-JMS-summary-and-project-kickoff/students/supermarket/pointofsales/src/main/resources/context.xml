@@ -27,6 +27,7 @@
         <property name="connectionFactory" ref="connectionFactory"/>
     </bean>
 
+	<!-- New sale information   !-->
 
     <bean id="reportingJmsTemplate" class="org.springframework.jms.core.JmsTemplate">
         <property name="connectionFactory" ref="connectionFactory"/>
@@ -34,7 +35,13 @@
         <property name="messageConverter" ref="reportConverter"/>
         <property name="sessionTransacted" value="true"/>
     </bean>
-    
+	
+    <bean id="reportingTopic" class="org.apache.activemq.command.ActiveMQTopic">
+        <constructor-arg value="reportingTopic"/>
+    </bean>
+	
+	<!-- New POS sending   !-->
+	
     <bean id="addPointOfSaleJmsTemplate" class="org.springframework.jms.core.JmsTemplate">
         <property name="connectionFactory" ref="connectionFactory"/>
         <property name="defaultDestination" ref="addPointOfSaleQueue"/>
@@ -46,22 +53,10 @@
         <constructor-arg value="addPointOfSaleQueue"/>
     </bean>
 
+	<!-- Price changing   !-->
+	
     <bean id="priceChangeTopic" class="org.apache.activemq.command.ActiveMQTopic">
         <constructor-arg value="priceChangeTopic"/>
-    </bean>
-    
-    <bean id="fullProductListTopic" class="org.apache.activemq.command.ActiveMQTopic">
-        <constructor-arg value="fullProductListTopic"/>
-    </bean>
-    
-    <bean id="reportingTopic" class="org.apache.activemq.command.ActiveMQTopic">
-        <constructor-arg value="reportingTopic"/>
-    </bean>
-
-    <bean id="fullProductListServiceAdapter" class="org.springframework.jms.listener.adapter.MessageListenerAdapter">
-        <property name="delegate" ref="fullProductListService"/>
-        <property name="defaultListenerMethod" value="fullProductList"/>
-        <property name="messageConverter" ref="fullProductListConverter"/>
     </bean>
     
     <bean id="priceChangeServiceAdapter" class="org.springframework.jms.listener.adapter.MessageListenerAdapter">
@@ -78,6 +73,18 @@
         <property name="transactionManager" ref="transactionManager"/>
     </bean>
     
+	<!-- Full product list   !-->
+	
+	<bean id="fullProductListTopic" class="org.apache.activemq.command.ActiveMQTopic">
+        <constructor-arg value="fullProductListTopic"/>
+    </bean>
+	
+	<bean id="fullProductListServiceAdapter" class="org.springframework.jms.listener.adapter.MessageListenerAdapter">
+        <property name="delegate" ref="fullProductListService"/>
+        <property name="defaultListenerMethod" value="fullProductList"/>
+        <property name="messageConverter" ref="fullProductListConverter"/>
+    </bean>
+	
     <bean id="fullProductListListenerContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
         <property name="messageListener" ref="fullProductListServiceAdapter"/>
         <property name="connectionFactory" ref="connectionFactory"/>
