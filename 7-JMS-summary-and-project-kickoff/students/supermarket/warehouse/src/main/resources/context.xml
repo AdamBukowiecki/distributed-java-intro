@@ -30,14 +30,14 @@
 
     <bean id="fullProductListJMSTemplate" class="org.springframework.jms.core.JmsTemplate">
         <property name="connectionFactory" ref="connectionFactory"/>
-        <property name="defaultDestination" ref="posTopic"/>
+        <property name="defaultDestination" ref="fullProductListTopic"/>
         <property name="messageConverter" ref="fullProductListConverter"/>
         <property name="sessionTransacted" value="true"/>
     </bean>
 	
 	<bean id="priceChangeJMSTemplate" class="org.springframework.jms.core.JmsTemplate">
         <property name="connectionFactory" ref="connectionFactory"/>
-        <property name="defaultDestination" ref="posTopic"/>
+        <property name="defaultDestination" ref="priceChangeTopic"/>
         <property name="messageConverter" ref="priceChangeConverter"/>
         <property name="sessionTransacted" value="true"/>
     </bean>
@@ -46,8 +46,12 @@
         <constructor-arg value="newPOSQueue"/>
     </bean>
 
-    <bean id="posTopic" class="org.apache.activemq.command.ActiveMQTopic">
-        <constructor-arg value="posTopic"/>
+    <bean id="priceChangeTopic" class="org.apache.activemq.command.ActiveMQTopic">
+        <constructor-arg value="priceChangeTopic"/>
+    </bean>
+    
+    <bean id="fullProductListTopic" class="org.apache.activemq.command.ActiveMQTopic">
+        <constructor-arg value="fullProductListTopic"/>
     </bean>
 
     <bean id="addPointOfSaleServiceAdapter" class="org.springframework.jms.listener.adapter.MessageListenerAdapter">

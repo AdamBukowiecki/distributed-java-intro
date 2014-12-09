@@ -8,7 +8,7 @@ import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import pl.edu.amu.dji.jms.lab4.models.PriceChange;
+import pl.edu.amu.dji.jms.lab4.messages.PriceChange;
 
 @Service("priceChangeService")
 public class PriceChangeService {
@@ -18,7 +18,7 @@ public class PriceChangeService {
 	private JmsTemplate jmsTemplate;
 
 	@Autowired
-	@Qualifier("posTopic")
+	@Qualifier("priceChangeTopic")
     private Destination priceTopic;
     
     @Transactional

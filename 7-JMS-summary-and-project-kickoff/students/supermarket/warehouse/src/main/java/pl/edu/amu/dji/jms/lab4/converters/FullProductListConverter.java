@@ -9,7 +9,7 @@ import org.springframework.jms.support.converter.MessageConversionException;
 import org.springframework.jms.support.converter.MessageConverter;
 import org.springframework.stereotype.Component;
 
-import pl.edu.amu.dji.jms.lab4.models.FullProductList;
+import pl.edu.amu.dji.jms.lab4.messages.FullProductList;
 
 import com.google.common.base.Preconditions;
 

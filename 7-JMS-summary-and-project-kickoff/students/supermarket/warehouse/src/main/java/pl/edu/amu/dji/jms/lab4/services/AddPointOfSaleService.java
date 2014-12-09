@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import pl.edu.amu.dji.jms.lab4.Warehouse;
-import pl.edu.amu.dji.jms.lab4.models.AddPointOfSale;
+import pl.edu.amu.dji.jms.lab4.messages.AddPointOfSale;
 import pl.edu.amu.dji.jms.lab4.tools.WarehouseAppUI;
 
 @Service("addPointOfSaleService")

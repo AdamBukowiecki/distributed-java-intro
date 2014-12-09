@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import pl.edu.amu.dji.jms.lab4.Warehouse;
-import pl.edu.amu.dji.jms.lab4.models.FullProductList;
+import pl.edu.amu.dji.jms.lab4.messages.FullProductList;
 
 @Service("fullProductListService")
 public class FullProductListService {
@@ -19,7 +19,7 @@ public class FullProductListService {
 	private JmsTemplate jmsTemplate;
 
 	@Autowired
-	@Qualifier("posTopic")
+	@Qualifier("fullProductListTopic")
     private Destination fullProductListTopic;
 
 	@Transactional

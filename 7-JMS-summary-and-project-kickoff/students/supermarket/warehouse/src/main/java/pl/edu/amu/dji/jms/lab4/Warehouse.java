@@ -8,6 +8,7 @@ import java.util.Set;
 import pl.edu.amu.dji.jms.lab4.models.PointOfSale;
 import pl.edu.amu.dji.jms.lab4.services.FullProductListService;
 import pl.edu.amu.dji.jms.lab4.services.PriceChangeService;
+import pl.edu.amu.dji.jms.lab4.tools.ProductsGenerator;
 
 public class Warehouse {
 
@@ -24,6 +25,9 @@ public class Warehouse {
 		pointsOfSale = new HashSet<>();
 		priceChangeService = new PriceChangeService();
 		fullProductListService = new FullProductListService();
+		
+		generateProducts();
+		
 	}
 	
 	public static Warehouse getInstance() {
@@ -53,6 +57,19 @@ public class Warehouse {
 	
 	public void addNewPointOfSale(String name) {
 		pointsOfSale.add(new PointOfSale(name));
+	}
+	
+	@Override
+	public String toString() {
+		String result = new String();
+		for(String name: products.keySet())
+			result += name + " => " + products.get(name) + "\n" ;
+		return result;
+	}
+	
+	private void generateProducts() {
+		ProductsGenerator generator = new ProductsGenerator();
+		generator.generateProducts(products);
 	}
 	
 }

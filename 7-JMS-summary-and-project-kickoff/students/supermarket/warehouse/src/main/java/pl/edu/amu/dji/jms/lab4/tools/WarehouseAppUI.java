@@ -11,9 +11,10 @@ public class WarehouseAppUI {
 	private final String QUIT = "quit";
 	private final String PRICE_CHANGE = "pc";
 	private final String SEND_PRODUCT_LIST = "spl";
+	private final String PRINT_PRODUCTS = "print";
 	
 	private final BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-
+	
 	public void start() {
 		
 		prepareUI();
@@ -34,6 +35,10 @@ public class WarehouseAppUI {
 					
 				case SEND_PRODUCT_LIST:
 					Warehouse.getInstance().sendFullProductsMessage();
+					break;
+					
+				case PRINT_PRODUCTS:
+					System.out.println(Warehouse.getInstance().toString());
 					break;
 					
 				case QUIT:
@@ -77,9 +82,10 @@ public class WarehouseAppUI {
 	}
 	
 	private void prepareUI() {
-		System.out.println(" ------------------ WarehouseApp ------------------");
+		System.out.println(" ------------------ Warehouse ------------------");
 		System.out.println("To change a price, enter '" + PRICE_CHANGE  + "'.");
 		System.out.println("To send full product list, enter '" + SEND_PRODUCT_LIST  + "'.");
+		System.out.println("To print products, enter '" + PRINT_PRODUCTS  + "'.");
 		System.out.println("To exit, enter '" + QUIT  + "'.");
 	}
 	

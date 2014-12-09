@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 import com.google.common.base.Preconditions;
 
-import pl.edu.amu.dji.jms.lab4.models.AddPointOfSale;
+import pl.edu.amu.dji.jms.lab4.messages.AddPointOfSale;
 
 @Component("addPointOfSaleConverter")
 public class AddPointOfSaleConverter implements MessageConverter {
