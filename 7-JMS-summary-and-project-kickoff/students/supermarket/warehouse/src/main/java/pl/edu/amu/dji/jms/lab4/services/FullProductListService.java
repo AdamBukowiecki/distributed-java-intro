@@ -26,7 +26,6 @@ public class FullProductListService {
     public void sendFullProductList() {
     	FullProductList fullProductList = new FullProductList(Warehouse.getInstance().getProducts());
         jmsTemplate.convertAndSend(fullProductList);
-        System.out.println("sendnalem fulla");
     }
     
 }
