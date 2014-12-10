@@ -23,6 +23,7 @@ public class PointOfSaleAppUI {
 			
 			while( uiRunning ) {
 		    	try {
+		    		printPrompt();
 					line = bufferedReader.readLine();
 					switch(line) {
 					case SELL:
@@ -85,6 +86,9 @@ public class PointOfSaleAppUI {
 			PointOfSale.getInstance().setName(name);
 		}
 	
-	
+		private void printPrompt() {
+			System.out.print("$ ");
+			System.out.print(" ");
+		}
 	
 }

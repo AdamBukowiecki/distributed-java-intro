@@ -24,6 +24,7 @@ public class WarehouseAppUI {
 		
 		while( uiRunning ) {
 	    	try {
+	    		printPrompt();
 				line = bufferedReader.readLine();
 				switch(line) {
 				case PRICE_CHANGE:
@@ -91,6 +92,11 @@ public class WarehouseAppUI {
 	
 	public static void print(final String message) {
 		System.out.println(message);
+	}
+	
+	private void printPrompt() {
+		System.out.print("$ ");
+		System.out.print(" ");
 	}
 	
 }
