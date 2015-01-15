@@ -1,12 +1,18 @@
 package com.uam.exercise1;
 
+import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
+import org.assertj.core.api.Assertions;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.web.client.RestTemplate;
 
@@ -31,6 +37,39 @@ public class BookStoreSecondIntegrationTest {
 
 	@Test
 	public void bookShouldBeCreatedAndDeleted() {
-
+		
+		HttpHeaders httpHeaders = new HttpHeaders();
+		List<Book> booksList = restTemplate.exchange(
+				Book.URL, 
+				HttpMethod.GET, 
+				new HttpEntity<Object>(httpHeaders), 
+				new ParameterizedTypeReference<List<Book>>() {}
+				).getBody();
+		
+		Assertions.assertThat(booksList).doesNotContain(testBook);
+		
+		final String testBookUrl = Book.URL;
+		restTemplate.postForObject(testBookUrl, testBook, Book.class);
+		
+		booksList = restTemplate.exchange(
+				Book.URL, 
+				HttpMethod.GET, 
+				new HttpEntity<Object>(httpHeaders), 
+				new ParameterizedTypeReference<List<Book>>() {}
+				).getBody();
+		
+		Assertions.assertThat(booksList).contains(testBook);
+		
+		restTemplate.delete(testBookUrl + testBook.getIsbn());
+		
+		booksList = restTemplate.exchange(
+				Book.URL, 
+				HttpMethod.GET, 
+				new HttpEntity<Object>(httpHeaders), 
+				new ParameterizedTypeReference<List<Book>>() {}
+				).getBody();
+		
+		Assertions.assertThat(booksList).doesNotContain(testBook);
+		
 	}
 }

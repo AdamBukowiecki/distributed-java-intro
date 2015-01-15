@@ -33,8 +33,6 @@ public class SayMain {
         MessageProducer producer = session.createProducer(topic);
         producer.setDeliveryMode(DeliveryMode.NON_PERSISTENT);
 
-        producer.setDeliveryMode(DeliveryMode.NON_PERSISTENT);
-
         connection.start();
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         String in = "";

@@ -13,7 +13,6 @@ import javax.jms.Session;
 @Component("offerConverter")
 public class OfferConverter implements MessageConverter {
 
-    @Override
     public Message toMessage(Object object, Session session) throws JMSException, MessageConversionException {
         Preconditions.checkArgument(object instanceof Offer);
 
@@ -26,7 +25,6 @@ public class OfferConverter implements MessageConverter {
         return message;
     }
 
-    @Override
     public Object fromMessage(Message message) throws JMSException, MessageConversionException {
         throw new UnsupportedOperationException();
     }

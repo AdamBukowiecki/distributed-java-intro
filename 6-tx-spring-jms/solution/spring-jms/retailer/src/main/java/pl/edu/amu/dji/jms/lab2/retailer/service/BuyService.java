@@ -21,7 +21,6 @@ public class BuyService implements MessageListener {
         this.maxPrice = maxPrice;
     }
 
-    @Override
     public void onMessage(Message message) {
         Preconditions.checkArgument(message instanceof MapMessage);
 
@@ -33,7 +32,6 @@ public class BuyService implements MessageListener {
                 Destination replayTo = mapMessage.getJMSReplyTo();
 
                 jmsTemplate.send(replayTo, new MessageCreator() {
-                    @Override
                     public Message createMessage(Session session) throws JMSException {
                         MapMessage buy = session.createMapMessage();
                         buy.setString("retailerID", getClass().getName());
